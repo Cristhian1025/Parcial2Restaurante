@@ -123,7 +123,7 @@ app.get('/restaurante/ventas', async (req, res) => {  //definimos la ruta
 
 
 // 4. Obtener los pedidos realizados en una fecha específica
-app.get('/pedidos/fecha/:fecha', async (req, res) => {
+app.get('/pedidos/fecha/:fecha', async (req, res) => { //definimos la ruta y el parametro a recibir
     const fecha = req.params.fecha; // Formato AAAA-MM-DD
     try {
         const result = await connection.query( //creamos, ejecutamos y guardamos la query y su resultado
@@ -131,7 +131,7 @@ app.get('/pedidos/fecha/:fecha', async (req, res) => {
              FROM Pedido
              WHERE fecha = $1;`,
             [fecha]
-        );
+        );  //obtemenos la info del pedido con la fecha especifica
         res.json(result.rows);//respondemos con el resultado
     } catch (error) {
         console.error(error); //mostramos el error en consola y el mensaje en la petición
@@ -140,16 +140,16 @@ app.get('/pedidos/fecha/:fecha', async (req, res) => {
 });
 
 // 5. Obtener los empleados por rol en un restaurante
-app.get('/restaurantes/:id_rest/empleados/:rol', async (req, res) => {
+app.get('/restaurantes/:id_rest/empleados/:rol', async (req, res) => { //recibidos tanto restaurante como rol
     const idRest = req.params.id_rest;
-    const rol = req.params.rol;
+    const rol = req.params.rol;       //guardamos los paremetros recibidos
     try {
         const result = await connection.query( //creamos, ejecutamos y guardamos la query y su resultado
             `SELECT *
              FROM Empleado
              WHERE id_rest = $1 AND rol = $2;`,
             [idRest, rol]
-        );
+        );  //obtenemos los datos de los empleados de cierto restaurante y con cierto Rol
         res.json(result.rows);//respondemos con el resultado
     } catch (error) {
         console.error(error); //mostramos el error en consola y el mensaje en la petición
