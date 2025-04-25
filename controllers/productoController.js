@@ -29,11 +29,11 @@ const obtenerProductoPorId = async (req, res) => {
 
 // Crear un nuevo producto
 const crearProducto = async (req, res) => {
-    const { nombre, precio } = req.body;
+    const {id_prod, nombre, precio } = req.body;
     try {
         const result = await connection.query(
-            'INSERT INTO Producto (nombre, precio) VALUES ($1, $2) RETURNING *',
-            [nombre, precio]
+            'INSERT INTO Producto (id_prod, nombre, precio) VALUES ($1, $2, $3) RETURNING *',
+            [id_prod, nombre, precio]
         );
         res.status(201).json(result.rows[0]);
     } catch (error) {
@@ -67,7 +67,9 @@ const eliminarProducto = async (req, res) => {
     const id = req.params.id;
     try {
         await connection.query('DELETE FROM Producto WHERE id_prod = $1', [id]);
+        res.json({ message: 'Producto eliminado' });
         res.status(204).send();
+        
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al eliminar el producto' });

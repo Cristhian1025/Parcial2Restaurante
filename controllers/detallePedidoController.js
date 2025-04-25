@@ -29,11 +29,11 @@ const obtenerDetallePedidoPorId = async (req, res) => {
 
 // Crear un nuevo detalle de pedido
 const crearDetallePedido = async (req, res) => {
-    const { id_pedido, id_prod, cantidad, subtotal } = req.body;
+    const {id_detalle, id_pedido, id_prod, cantidad, subtotal } = req.body;
     try {
         const result = await connection.query(
-            'INSERT INTO Detalle_Pedido (id_pedido, id_prod, cantidad, subtotal) VALUES ($1, $2, $3, $4) RETURNING *',
-            [id_pedido, id_prod, cantidad, subtotal]
+            'INSERT INTO Detalle_Pedido (id_detalle,id_pedido, id_prod, cantidad, subtotal) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [id_detalle,id_pedido, id_prod, cantidad, subtotal]
         );
         res.status(201).json(result.rows[0]);
     } catch (error) {
@@ -67,6 +67,7 @@ const eliminarDetallePedido = async (req, res) => {
     const id = req.params.id;
     try {
         await connection.query('DELETE FROM Detalle_Pedido WHERE id_detalle = $1', [id]);
+        res.json({ message: 'Detallitos eliminaditos' });
         res.status(204).send();
     } catch (error) {
         console.error(error);

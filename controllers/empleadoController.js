@@ -29,11 +29,11 @@ const obtenerEmpleadoPorId = async (req, res) => {
 
 // Crear un nuevo empleado
 const crearEmpleado = async (req, res) => {
-    const { nombre, rol, id_rest } = req.body;
+    const {id_empleado, nombre, rol, id_rest } = req.body;
     try {
         const result = await connection.query(
-            'INSERT INTO Empleado (nombre, rol, id_rest) VALUES ($1, $2, $3) RETURNING *',
-            [nombre, rol, id_rest]
+            'INSERT INTO Empleado (id_empleado, nombre, rol, id_rest) VALUES ($1, $2, $3, $4) RETURNING *',
+            [id_empleado,nombre, rol, id_rest]
         );
         res.status(201).json(result.rows[0]);
     } catch (error) {
@@ -67,6 +67,7 @@ const eliminarEmpleado = async (req, res) => {
     const id = req.params.id;
     try {
         await connection.query('DELETE FROM Empleado WHERE id_empleado = $1', [id]);
+        res.json({ message: 'Empleado eliminado' });
         res.status(204).send();
     } catch (error) {
         console.error(error);

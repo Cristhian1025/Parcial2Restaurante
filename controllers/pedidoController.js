@@ -29,11 +29,11 @@ const obtenerPedidoPorId = async (req, res) => {
 
 // Crear un nuevo pedido
 const crearPedido = async (req, res) => {
-    const { fecha, id_rest, total } = req.body;
+    const {id_pedido, fecha, id_rest, total } = req.body;
     try {
         const result = await connection.query(
-            'INSERT INTO Pedido (fecha, id_rest, total) VALUES ($1, $2, $3) RETURNING *',
-            [fecha, id_rest, total]
+            'INSERT INTO Pedido (id_pedido, fecha, id_rest, total) VALUES ($1, $2, $3, $4) RETURNING *',
+            [id_pedido, fecha, id_rest, total]
         );
         res.status(201).json(result.rows[0]);
     } catch (error) {
@@ -67,6 +67,7 @@ const eliminarPedido = async (req, res) => {
     const id = req.params.id;
     try {
         await connection.query('DELETE FROM Pedido WHERE id_pedido = $1', [id]);
+        res.json({ message: 'Peddido eliminado' });
         res.status(204).send();
     } catch (error) {
         console.error(error);

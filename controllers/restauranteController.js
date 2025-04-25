@@ -29,11 +29,11 @@ const obtenerRestaurantePorId = async (req, res) => {
 
 // Crear un nuevo restaurante
 const crearRestaurante = async (req, res) => {
-    const { nombre, ciudad, direccion, fecha_apertura } = req.body;
+    const { id_rest,nombre, ciudad, direccion, fecha_apertura } = req.body;
     try {
         const result = await connection.query(
-            'INSERT INTO Restaurante (nombre, ciudad, direccion, fecha_apertura) VALUES ($1, $2, $3, $4) RETURNING *',
-            [nombre, ciudad, direccion, fecha_apertura]
+            'INSERT INTO Restaurante (id_rest, nombre, ciudad, direccion, fecha_apertura) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [id_rest, nombre, ciudad, direccion, fecha_apertura]
         );
         res.status(201).json(result.rows[0]); // 201 Created
     } catch (error) {
@@ -67,7 +67,8 @@ const eliminarRestaurante = async (req, res) => {
     const id = req.params.id;
     try {
         await connection.query('DELETE FROM Restaurante WHERE id_rest = $1', [id]);
-        res.status(204).send(); // 204 No Content (eliminación exitosa)
+        res.json({ message: 'Producto eliminado' });
+        res.status(204).send();
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al eliminar el restaurante' });

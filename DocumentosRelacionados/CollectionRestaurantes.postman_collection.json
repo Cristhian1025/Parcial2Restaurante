@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "5b08f7ac-71d0-4927-92a4-7d334cfcf7d8",
-		"name": "New Collection",
+		"name": "CollectionRestaurantes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43766248"
 	},
@@ -399,6 +399,115 @@
 							"path": [
 								"detalles-pedido",
 								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consultas",
+			"item": [
+				{
+					"name": "1ProductosDePedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pedidos/10/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos",
+								"10",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2MasVendiddos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/productos/mas-vendidos/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"productos",
+								"mas-vendidos",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3RestaurantesVentas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/restaurante/ventas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"restaurante",
+								"ventas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4RestauranteFecha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/restaurante/ventas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"restaurante",
+								"ventas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5empleadoRol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/restaurantes/10/empleados/limpieza",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"restaurantes",
+								"10",
+								"empleados",
+								"limpieza"
 							]
 						}
 					},
